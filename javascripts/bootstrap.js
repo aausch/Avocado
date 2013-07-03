@@ -1210,6 +1210,7 @@ thisModule.addSlots(avocado.transporter, function(add) {
 
   add.method('initializeRepositories', function () {
     var baseURL = avocado.transporter.avocadoBaseURL;
+    if (window.avocado.git_source) { baseURL = window.avocado.git_source;}  // aaa - Hack? Should I be setting avocadoBaseURL instead? -- alex July 2013
     if (baseURL === undefined) { baseURL = document.documentURI; }
     baseURL = baseURL.substring(0, baseURL.lastIndexOf("/")) + '/';
     var repoURL = baseURL + "javascripts/";
@@ -1217,8 +1218,11 @@ thisModule.addSlots(avocado.transporter, function(add) {
     // aaa - hack because I want saving to keep working on my local machine
     if (repoURL.indexOf("http://localhost") === 0 || repoURL.indexOf("http://127.0.0.1") === 0) { avocado.kernelModuleSupportsWebDAV = true; }
     
+    console.log(repoURL);
     var kernelRepo;
-    if (window.kernelModuleSavingScriptURL) {
+    if (window.avocado.git_source) {
+      kernelRepo = Object.newChildOf(avocado.transporter.repositories.github, repoURL);
+    } else if (window.kernelModuleSavingScriptURL) {
       var savingScriptURL = window.kernelModuleSavingScriptURL;
       kernelRepo = Object.newChildOf(avocado.transporter.repositories.httpWithSavingScript, repoURL, savingScriptURL);
     } else if (avocado.kernelModuleSupportsWebDAV) {
@@ -1697,6 +1701,8 @@ thisModule.addSlots(avocado.transporter.repositories, function(add) {
 
   add.creator('httpWithSavingScript', Object.create(avocado.transporter.repositories.http));
 
+  add.creator('github', Object.create(avocado.transporter.repositories.http));
+
 });
 
 
@@ -1706,6 +1712,11 @@ thisModule.addSlots(avocado.transporter.repositories.httpWithSavingScript, funct
     this._url = url;
     this._savingScriptURL = savingScriptURL;
   }, {category: ['creating']});
+
+});
+
+
+thisModule.addSlots(avocado.transporter.repositories.github, function(add) {
 
 });
 

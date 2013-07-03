@@ -12,6 +12,7 @@ requires('programming_environment/test_case_morph');
 requires('programming_environment/webdav');
 requires('db/couch');
 requires('demo/person');
+requires('github');
 
 }, function(thisModule) {
 
