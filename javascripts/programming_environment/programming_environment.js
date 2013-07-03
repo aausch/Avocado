@@ -1,5 +1,6 @@
 avocado.transporter.module.create('programming_environment/programming_environment', function(requires) {
 
+requires('github');
 requires('avocado_lib');
 requires('general_ui/general_ui');
 requires('programming_environment/mirror_morph');
@@ -12,7 +13,7 @@ requires('programming_environment/test_case_morph');
 requires('programming_environment/webdav');
 requires('db/couch');
 requires('demo/person');
-requires('github');
+
 
 }, function(thisModule) {
 
