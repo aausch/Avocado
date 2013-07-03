@@ -91,6 +91,23 @@ thisModule.addSlots(avocado.transporter.repositories.http, function(add) {
 
 });
 
+thisModule.addSlots(avocado.transporter.repositories.github, function(add) {
+
+  add.method('fileOutModuleVersion', function (moduleVersion, codeToFileOut, successBlock, failBlock) {
+    var url = this.urlForModuleName(moduleVersion.module().name());
+    this.saveFile(url, codeToFileOut, successBlock, failBlock);
+  }, {category: ['saving']});
+
+  add.method('saveFile', function (url, fileContents, successBlock, failBlock) {
+    var repoURL = this.url();
+    if (url.substring(0, repoURL.length) === repoURL) { url = url.substring(0, repoURL.length); }
+    avocado.github.currentRepo().write('master',url, fileContents, "Avocado saving to " + url, function(err) {
+	alert("Oops! Save failed! " + err + " [[[TODO: find a nicer way to report this -- alex]]]");
+    });
+
+  }, {category: ['saving']});
+
+});
 
 thisModule.addSlots(avocado.transporter.repositories.httpWithWebDAV, function(add) {
 
