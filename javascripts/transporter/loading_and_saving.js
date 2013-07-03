@@ -104,7 +104,7 @@ thisModule.addSlots(avocado.transporter.repositories.github, function(add) {
     console.log(repoURL);
     if (url.substring(0, repoURL.length) === repoURL) { url = url.substring(0, repoURL.length); }
     var user = avocado.github._github.getUser();
-    var repo = avocado.github._github.getRepo(user.name, avocado.github.currentRepo().name);
+    var repo = avocado.github._github.getRepo('aausch', avocado.github.currentRepo().name);
     repo.write('master',url, fileContents, "Avocado saving to " + url, function(err) {
 	alert("Oops! Save failed! " + err + " [[[TODO: find a nicer way to report this -- alex]]]" + url);
     });
