@@ -18,10 +18,9 @@ thisModule.addSlots(avocado.github, function(add) {
 
   add.method('login', function (uid, pwd, callback) {
  if (uid && pwd) {
- avocado.github._github = new Github({
+ avocado.github._github = new Octokit({
     username: uid,
-  password: pwd,
-  auth: "basic"
+  password: pwd
 });
 if(callback) callback(avocado.github._github)
  } else {

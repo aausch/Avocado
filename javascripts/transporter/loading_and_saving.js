@@ -102,13 +102,15 @@ thisModule.addSlots(avocado.transporter.repositories.github, function(add) {
     var repoURL = this.url();
     console.log (url);
     console.log(repoURL);
-    if (url.substring(0, repoURL.length) === repoURL) { url = url.substring(0, repoURL.length); }
+    if (url.substring(0, repoURL.length) === repoURL) { url = 'javascripts/' +  url.substring(0, repoURL.length); }
     var user = avocado.github._github.getUser();
     var repo = avocado.github._github.getRepo('aausch', avocado.github.currentRepo().name);
-    repo.write('master',url, fileContents, "Avocado saving to " + url, function(err) {
-	alert("Oops! Save failed! " + err + " [[[TODO: find a nicer way to report this -- alex]]]" + url);
-    });
+    var branch = repo.getDefaultBranch(); //TODO: select a branch to write to
 
+    var message = "Avocado saving to " + url;
+    var isBinary = false;
+    branch.write(url, fileContents, message, isBinary)
+	  .done(function() { alert(message + " [COMPLETED]");});
   }, {category: ['saving']});
 
 });
