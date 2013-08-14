@@ -558,7 +558,9 @@ var annotator = {
     // with decent GC this might not matter. Don't worry about it yet.
     var cs = this.creatorSlotDeterminableFromTheObjectItself(o);
     if (cs) {
-      return o.__annotation__ = this.newObjectAnnotation(o);
+      anno = this.newObjectAnnotation(o);
+      Object.defineProperty(o, "__annotation__", { value: anno, enumerable: false, configurable: true });
+      return anno;
     }
     
     return null;
