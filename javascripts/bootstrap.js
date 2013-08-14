@@ -891,7 +891,7 @@ avocado.annotator = annotator;
 
 // Need to use basicCreate to create the annotations for the annotation prototypes; otherwise we get an infinite recursion.
 
-Object.defineProperty(annotator.objectAnnotationPrototype, "__annotation__", { value: Object.basicCreate(annotator.objectAnnotationPrototype), enumerable: false, configurable: true })
+Object.defineProperty(annotator.objectAnnotationPrototype, "__annotation__", { value: Object.basicCreate(annotator.objectAnnotationPrototype), enumerable: false, configurable: true });
 
 annotator.annotationOf(avocado).setCreatorSlot('avocado', window);
 annotator.annotationOf(window).setSlotAnnotation('avocado', {category: ['avocado']});
