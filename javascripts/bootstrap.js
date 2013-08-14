@@ -545,7 +545,7 @@ var annotator = {
     if (anno !== null) { return anno; }
     anno = this.newObjectAnnotation(o);
     Object.defineProperty(o, "__annotation__", { value: anno, enumerable: false, configurable: true });
-    return anno;
+    return o.__annotation__;
   },
 
   existingAnnotationOf: function(o) {
@@ -560,7 +560,7 @@ var annotator = {
     if (cs) {
       anno = this.newObjectAnnotation(o);
       Object.defineProperty(o, "__annotation__", { value: anno, enumerable: false, configurable: true });
-      return anno;
+      return o.__annotation__;
     }
     
     return null;
@@ -822,7 +822,8 @@ var annotator = {
 avocado.annotator = annotator;
 
 // Need to use basicCreate to create the annotations for the annotation prototypes; otherwise we get an infinite recursion.
-annotator.objectAnnotationPrototype.__annotation__ = Object.basicCreate(annotator.objectAnnotationPrototype);
+
+Object.defineProperty(annotator.objectAnnotationPrototype, "__annotation__", { value: Object.basicCreate(annotator.objectAnnotationPrototype), enumerable: false, configurable: true })
 
 annotator.annotationOf(avocado).setCreatorSlot('avocado', window);
 annotator.annotationOf(window).setSlotAnnotation('avocado', {category: ['avocado']});
