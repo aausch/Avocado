@@ -541,11 +541,11 @@ var annotator = {
   },
 
   annotationOf: function(o) {
-    var a = this.existingAnnotationOf(o);
-    if (a !== null) { return a; }
-    a = this.newObjectAnnotation(o);
-    o.__annotation__ = a;
-    return a;
+    var anno = this.existingAnnotationOf(o);
+    if (anno !== null) { return anno; }
+    anno = this.newObjectAnnotation(o);
+    Object.defineProperty(o, "__annotation__", { value: anno, enumerable: false, configurable: true });
+    return anno;
   },
 
   existingAnnotationOf: function(o) {
