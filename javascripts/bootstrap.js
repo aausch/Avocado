@@ -134,8 +134,8 @@ if(typeof jQuery!='undefined'){
 
 	// Return the modified object
 	return target;
-   }
-};
+   };
+}
 
 
 Object.extendWithJustDirectPropertiesOf = function extendWithJustDirectPropertiesOf(destination, source) {
