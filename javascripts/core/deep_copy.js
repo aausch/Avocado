@@ -46,7 +46,8 @@ thisModule.addSlots(avocado.deepCopier, function(add) {
           if (o.hasOwnProperty(n)) {
             var contents = o[n];
             if (n === '__annotation__') {
-              c[n] = contents.copy();
+	      anno = contents.copy();
+              Object.defineProperty(c,n, { value: anno, enumerable: false, configurable: true }); 
             } else {
               var contentsType = typeof(contents);
               var contentsCreatorSlot = (contentsType === 'object' || contentsType === 'function') && avocado.annotator.theCreatorSlotOf(contents);
