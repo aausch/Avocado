@@ -63,7 +63,7 @@ thisModule.addSlots(avocado.github, function(add) {
   add.method('currentBranch', function () {
     if (this._current_branch) {return this._current_branch;}
     return this.selectBranch();
-  }
+  });
 
   add.method('selectRepo', function () {
     if (this._github) {
