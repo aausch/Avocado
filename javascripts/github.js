@@ -59,11 +59,16 @@ thisModule.addSlots(avocado.github, function(add) {
     return this.selectRepo();
   });
 
+  add.method('currentBranch', function () {
+    if (this._current_repo) {return this._current_repo;}
+    return this.selectBranch();
+  }
+
   add.method('selectRepo', function () {
     if (this._github) {
       return this.showRepoSelectionMorph(this.github());
     } else {
-      avocado.ui.alert("Not logged in! Log in first.");
+      avocado.ui.showMessage("Not logged in! Log in first.");
       this.login();
     }
   });
