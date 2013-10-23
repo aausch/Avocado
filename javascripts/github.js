@@ -14,7 +14,6 @@ thisModule.addSlots(avocado.github, function(add) {
 
   add.creator('file', {});
 
-  add.creator('_github', Object.create({}));
 
   add.method('login', function (uid, pwd, callback) {
     var wrapped_callback = function() {
@@ -34,6 +33,8 @@ thisModule.addSlots(avocado.github, function(add) {
   });
 
   add.data('_current_repo', null);
+
+  add.data('_github', null);
 
   add.method('github', function () {
     if (this._github) { return this._github; }
