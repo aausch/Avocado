@@ -14,21 +14,26 @@ thisModule.addSlots(avocado.github, function(add) {
 
   add.creator('file', {});
 
+  add.creator('_github', Object.create({}));
+
   add.method('login', function (uid, pwd, callback) {
+    var wrapped_callback = function() {
+      avocado.github._current_repo = avocado.github._github.getRepo('aausch','Avocado');
+      avocado.github._current_branch = avocado.github._current_repo.getBranch('gh_pages');
+      if (callback) callback();
+    }
     if (uid && pwd) {
       avocado.github._github = new Octokit({
         username: uid,
         password: pwd
       });
-      if(callback) callback(avocado.github._github)
+      wrapped_callback();
      } else {
-       return avocado.github.showGithubLogin(callback);
+       return avocado.github.showGithubLogin(wrapped_callback());
      }
   });
 
   add.data('_current_repo', null);
-  
-  add.data('_github', null);
 
   add.method('github', function () {
     if (this._github) { return this._github; }
@@ -57,7 +62,7 @@ thisModule.addSlots(avocado.github, function(add) {
     if (this._github) {
       return this.showRepoSelectionMorph(this.github());
     } else {
-      avocado.ui.showMessage("Not logged in! Log in first.");
+      avocado.ui.alert("Not logged in! Log in first.");
       this.login();
     }
   });
