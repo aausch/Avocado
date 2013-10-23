@@ -1,0 +1,45 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'bower.json' ]
+2 info using npm@1.2.15
+3 info using node@v0.10.2
+4 verbose read json /Users/alex/Sites/avocado/Avocado/public/javascripts/octokit/package.json
+5 verbose from cache /Users/alex/Sites/avocado/Avocado/public/javascripts/octokit/package.json
+6 verbose readDependencies using package.json deps
+7 verbose cache add [ 'bower.json', null ]
+8 verbose cache add name=undefined spec="bower.json" args=["bower.json",null]
+9 verbose parsed url { protocol: null,
+9 verbose parsed url   slashes: null,
+9 verbose parsed url   auth: null,
+9 verbose parsed url   host: null,
+9 verbose parsed url   port: null,
+9 verbose parsed url   hostname: null,
+9 verbose parsed url   hash: null,
+9 verbose parsed url   search: null,
+9 verbose parsed url   query: null,
+9 verbose parsed url   pathname: 'bower.json',
+9 verbose parsed url   path: 'bower.json',
+9 verbose parsed url   href: 'bower.json' }
+10 silly lockFile a1471113-bower-json bower.json
+11 verbose lock bower.json /Users/alex/.npm/a1471113-bower-json.lock
+12 silly lockFile a1471113-bower-json bower.json
+13 verbose addNamed [ 'bower.json', '' ]
+14 verbose addNamed [ null, '' ]
+15 silly lockFile 7da079a2-bower-json bower.json@
+16 verbose lock bower.json@ /Users/alex/.npm/7da079a2-bower-json.lock
+17 silly lockFile 7da079a2-bower-json bower.json@
+18 error Error: EACCES, open '/Users/alex/.npm/7da079a2-bower-json.lock'
+18 error  { [Error: EACCES, open '/Users/alex/.npm/7da079a2-bower-json.lock']
+18 error   errno: 3,
+18 error   code: 'EACCES',
+18 error   path: '/Users/alex/.npm/7da079a2-bower-json.lock' }
+19 error Please try running this command again as root/Administrator.
+20 error System Darwin 12.5.0
+21 error command "node" "/usr/local/bin/npm" "install" "bower.json"
+22 error cwd /Users/alex/Sites/avocado/Avocado/public/javascripts/octokit
+23 error node -v v0.10.2
+24 error npm -v 1.2.15
+25 error path /Users/alex/.npm/7da079a2-bower-json.lock
+26 error code EACCES
+27 error errno 3
+28 error stack Error: EACCES, open '/Users/alex/.npm/7da079a2-bower-json.lock'
+29 verbose exit [ 3, true ]
