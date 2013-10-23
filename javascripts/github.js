@@ -5,7 +5,7 @@ avocado.transporter.module.create('github', function(requires) {
 
 thisModule.addSlots(avocado, function(add) {
 
-  add.creator('github', {}, {category: ['github']});
+  add.creator('github', Object.create({}), {category: ['github']});
 
 });
 

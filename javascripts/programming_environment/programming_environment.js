@@ -1,6 +1,5 @@
 avocado.transporter.module.create('programming_environment/programming_environment', function(requires) {
 
-requires('github');
 requires('avocado_lib');
 requires('general_ui/general_ui');
 requires('programming_environment/mirror_morph');
