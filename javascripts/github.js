@@ -41,7 +41,7 @@ thisModule.addSlots(avocado.github, function(add) {
   add.method('showGithubLogin', function (callback) {
     var wrapped_callback = function() {
       avocado.github._current_repo = avocado.github._github.getRepo('aausch','Avocado');
-      avocado.github._current_branch = avocado.github._current_repo.getBranch('gh_pages');
+      avocado.github._current_branch = avocado.github._current_repo.getBranch('gh-pages');
       if (callback) callback();
     }
     avocado.ui.prompt("Enter github uid:", function(uid) {
