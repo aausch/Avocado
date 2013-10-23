@@ -57,7 +57,7 @@ thisModule.addSlots(avocado.github, function(add) {
     if (this._github) {
       return this.showRepoSelectionMorph(this.github());
     } else {
-      avocado.ui.alert("Not logged in! Log in first.");
+      avocado.ui.showMessage("Not logged in! Log in first.");
       this.login();
     }
   });
