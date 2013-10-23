@@ -144,8 +144,7 @@ thisModule.addSlots(avocado.transporter.repositories.github, function(add) {
   add.method('saveFile', function (url, fileContents, successBlock, failBlock) {
     var repoURL = this.url();
     if (url.substring(0, repoURL.length) === repoURL) { url = url.substring(0, repoURL.length); }
-      avocado.github.currentBranch().write(url, fileContents, "Avocado saving to " + url,false);
-    });
+    avocado.github.currentBranch().write(url, fileContents, "Avocado saving to " + url,false);
 
   }, {category: ['saving']});
 
