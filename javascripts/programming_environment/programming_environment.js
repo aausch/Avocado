@@ -11,6 +11,7 @@ requires('programming_environment/pretty_printer');
 requires('programming_environment/searching');
 requires('programming_environment/test_case_morph');
 requires('programming_environment/webdav');
+requires('github');
 requires('db/couch');
 requires('demo/person');
 

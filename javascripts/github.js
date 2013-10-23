@@ -17,23 +17,23 @@ thisModule.addSlots(avocado.github, function(add) {
   add.creator('_github', Object.create({}));
 
   add.method('login', function (uid, pwd, callback) {
- if (uid && pwd) {
- avocado.github._github = new Octokit({
-    username: uid,
-  password: pwd
-});
-if(callback) callback(avocado.github._github)
- } else {
-   return avocado.github.showGithubLogin(callback);
- }
-});
+    if (uid && pwd) {
+      avocado.github._github = new Octokit({
+        username: uid,
+        password: pwd
+      });
+      if(callback) callback(avocado.github._github)
+     } else {
+       return avocado.github.showGithubLogin(callback);
+     }
+  });
 
   add.data('_current_repo', null);
 
   add.method('github', function () {
- if (this._github) { return this._github; }
- return avocado.github.login();
-});
+    if (this._github) { return this._github; }
+    return avocado.github.login();
+  });
 
   add.method('showGithubLogin', function (callback) {
     avocado.ui.prompt("Enter github uid:", function(uid) {
@@ -49,18 +49,18 @@ if(callback) callback(avocado.github._github)
   });
 
   add.method('currentRepo', function () {
-  if (this._current_repo) {return this._current_repo;}
- return this.selectRepo();
-});
+    if (this._current_repo) {return this._current_repo;}
+    return this.selectRepo();
+  });
 
   add.method('selectRepo', function () {
- if (this._github) {
- return this.showRepoSelectionMorph(this.github());
- } else {
-   avocado.ui.alert("Not logged in! Log in first.");
- this.login();
- }
-});
+    if (this._github) {
+      return this.showRepoSelectionMorph(this.github());
+    } else {
+      avocado.ui.alert("Not logged in! Log in first.");
+      this.login();
+    }
+  });
 
 });
 

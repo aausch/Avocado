@@ -1290,7 +1290,6 @@ thisModule.addSlots(avocado.transporter, function(add) {
     // aaa - hack because I want saving to keep working on my local machine
     if (repoURL.indexOf("http://localhost") === 0 || repoURL.indexOf("http://127.0.0.1") === 0) { avocado.kernelModuleSupportsWebDAV = true; }
     
-    console.log(repoURL);
     var kernelRepo;
     if (window.avocado.git_source) {
       kernelRepo = Object.newChildOf(avocado.transporter.repositories.github, repoURL);
@@ -1784,11 +1783,6 @@ thisModule.addSlots(avocado.transporter.repositories.httpWithSavingScript, funct
     this._url = url;
     this._savingScriptURL = savingScriptURL;
   }, {category: ['creating']});
-
-});
-
-
-thisModule.addSlots(avocado.transporter.repositories.github, function(add) {
 
 });
 
