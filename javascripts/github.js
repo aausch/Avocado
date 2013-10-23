@@ -5,7 +5,7 @@ avocado.transporter.module.create('github', function(requires) {
 
 thisModule.addSlots(avocado, function(add) {
 
-  add.creator('github', Object.create({}), {category: ['github']});
+  add.creator('github', {}, {category: ['github']});
 
 });
 
@@ -16,23 +16,20 @@ thisModule.addSlots(avocado.github, function(add) {
 
 
   add.method('login', function (uid, pwd, callback) {
-    var wrapped_callback = function() {
-      avocado.github._current_repo = avocado.github._github.getRepo('aausch','Avocado');
-      avocado.github._current_branch = avocado.github._current_repo.getBranch('gh_pages');
-      if (callback) callback();
-    }
     if (uid && pwd) {
       avocado.github._github = new Octokit({
         username: uid,
         password: pwd
       });
-      wrapped_callback();
+      if (callback) callback();
      } else {
-       return avocado.github.showGithubLogin(wrapped_callback());
+       return avocado.github.showGithubLogin(callback());
      }
   });
 
   add.data('_current_repo', null);
+
+  add.data('_current_branch', null);
 
   add.data('_github', null);
 
@@ -42,16 +39,20 @@ thisModule.addSlots(avocado.github, function(add) {
   });
 
   add.method('showGithubLogin', function (callback) {
+    var wrapped_callback = function() {
+      avocado.github._current_repo = avocado.github._github.getRepo('aausch','Avocado');
+      avocado.github._current_branch = avocado.github._current_repo.getBranch('gh_pages');
+      if (callback) callback();
+    }
     avocado.ui.prompt("Enter github uid:", function(uid) {
        if (uid){
          avocado.ui.prompt("Enter github password:", function(pwd) {
            if (pwd) {
-             avocado.github.login(uid,pwd,callback);
+             avocado.github.login(uid,pwd,wrapped_callback);
            }
-	   });
-	   
+	 });
        }
-	});
+    });
   });
 
   add.method('currentRepo', function () {
@@ -60,9 +61,9 @@ thisModule.addSlots(avocado.github, function(add) {
   });
 
   add.method('currentBranch', function () {
-    if (this._current_repo) {return this._current_repo;}
+    if (this._current_branch) {return this._current_branch;}
     return this.selectBranch();
-  });
+  }
 
   add.method('selectRepo', function () {
     if (this._github) {
