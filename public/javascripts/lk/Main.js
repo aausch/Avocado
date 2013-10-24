@@ -82,13 +82,6 @@ Object.subclass('lively.Main.Loader', {
 			window.onresize();
 	},
 
-	showWikiNavigator: function() {
-		require('lively.LKWiki').toRun(function() {
-			console.log('starting WikiNavigator');
-			WikiNavigator.enableWikiNavigator();
-		});
-	},
-
 	systemStart: function() {
 		console.group("World loading");
 
@@ -124,9 +117,6 @@ Object.subclass('lively.Main.Loader', {
 			            world.displayOnCanvas(canvas);
 			            console.log("world is " + world);
 						changes && changes.evaluateInitializer();
-
-			            if (Config.showWikiNavigator) loader.showWikiNavigator();
-
 						console.groupEnd("World loading");
 					})
 				})

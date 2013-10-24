@@ -1838,8 +1838,6 @@ BoxMorph.subclass('TextMorph', {
 		evt.hand.setMouseFocus(null);
 		evt.stop();	 // else weird things happen when return from this link by browser back button
 		var url = URL.ensureAbsoluteURL(link);
-		// add require to LKWiki.js here
-		var wikiNav = Global['WikiNavigator'] && new WikiNavigator(url, null, -1 /*FIXME don't ask for the headrevision*/);
 		var isExternalLink = url.hostname != document.location.hostname;
 		var openInNewWindow = evt.isMetaDown();
 
@@ -1858,10 +1856,7 @@ BoxMorph.subclass('TextMorph', {
 		if (!Config.confirmNavigation) 
 			return followLink();
 		
-		if (wikiNav && wikiNav.isActive() && !isExternalLink)
-			wikiNav.askToSaveAndNavigateToUrl(this.world(), openInNewWindow);
-		else
-			this.world().confirm("Please confirm link to " + url.toString(), followLink);
+	    this.world().confirm("Please confirm link to " + url.toString(), followLink);
 	},	
 
 	onMouseUp: function(evt) {

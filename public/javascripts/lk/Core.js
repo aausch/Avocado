@@ -4500,13 +4500,7 @@ Morph.addMethods({
 
 	exportLinkedFile: function(filename) {
 		var url;
-		if (Global["WikiNavigator"] && WikiNavigator.current) {
-			var nav = WikiNavigator.current;
-			url = WikiNavigator.fileNameToURL(filename);
-			nav.interactiveSaveWorld(url);
-		} else {
-			url = WorldMorph.current().saveWorld(filename);
-		}
+	    url = WorldMorph.current().saveWorld(filename);
 		if (url) this.world().reactiveAddMorph(new ExternalLinkMorph(url));
 		return url;
 	}
@@ -5358,13 +5352,8 @@ WorldMorph.addMethods({
 		menu.addItems(this.subMenuItems(evt));
 		menu.addLine();
 		menu.addItems([
-			["New subworld (LinkMorph)", function(evt) { evt.hand.world().addMorph(new LinkMorph(null, evt.point()));}],  
-			["External link", function(evt) { evt.hand.world().addMorph(new ExternalLinkMorph(URL.source, evt.point()));}],
 			["authenticate for write access", function() {
-				new NetRequest().put(URL.source.withFilename('auth'));
-				// sometimes the wikiBtn seems to break after an authenticate
-				if (Config.showWikiNavigator) WikiNavigator.enableWikiNavigator(true); }],
-			["publish world as ... ", function() { this.promptAndSaveWorld()}]
+				new NetRequest().put(URL.source.withFilename('auth'));}]
 		]);
 		if (Global.URL && (URL.source.filename() != "index.xhtml") ) { // Global. avoids an error if Network.js not loaded
 			// save but only if it's not the startup world
@@ -5464,16 +5453,7 @@ WorldMorph.addMethods({
 				m.startSteppingScripts(); }],
 			["XHTML Browser", function(evt) { 
 				var xeno = new XenoBrowserWidget('sample.xhtml');
-				xeno.openIn(world); }],
-			["Viewer for latest file changes", function(evt) {
-			var cb = function(input) {
-				require('lively.LKWiki').toRun(function(u,m) {
-					var url = new URL(input);
-					console.log(url);
-					new LatestWikiChangesList(url).openIn(world);
-			}); }
-				world.prompt('Url to observe', cb, URL.source.getDirectory().toString()); 
-			}]
+				xeno.openIn(world); }]
 		];
 
 		if (Config.debugExtras) { var index = -1;
