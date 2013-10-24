@@ -981,10 +981,6 @@ ide.BrowserNode.subclass('lively.ide.SourceControlNode', {
 				nodes.push(new ide.CompleteOmetaFragmentNode(srcDb.rootFragmentForModule(fn), b, this, fn));
 			} else if (fn.endsWith('.lkml')) {
 				nodes.push(new ide.ChangeSetNode(ChangeSet.fromFile(fn, srcDb.getCachedText(fn)), b, this));
-			} else if (fn.endsWith('.st')) {
-				require('lively.SmalltalkParserSupport').toRun(function() {
-					nodes.push(new StBrowserFileNode(srcDb.rootFragmentForModule(fn), b, this, fn));
-				}.bind(this))
 			}
 		};
 		nodes.push(ChangeSet.current().asNode(b)); // add local changes
@@ -1369,24 +1365,21 @@ ide.FileFragmentNode.subclass('lively.ide.ClassElemFragmentNode', {
 						.select(function(ea) { return ea.name === searchName });
 					var title = 'implementers of' + searchName;
 					new ChangeList(title, null, list, searchName).openIn(WorldMorph.current()) }]
-    	].concat(menu);
+		].concat(menu);
 	},
-sourceString: function($super) {
+
+    sourceString: function($super) {
 	var src = $super();
 	var view = this.browser.viewAs;
 	if (!view) return src;
-	if (view != 'javascript' && view != 'smalltalk')
+	if (view != 'javascript')
 		return 'unknown source view';
 	var browserNode = this;
-	var result = 'loading Smalltalk module, click again on list item';
-	require('lively.SmalltalkParser').toRun(function() {
-		var jsSrc = '{' + src + '}' // as literal object
-		var jsAst = OMetaSupport.matchAllWithGrammar(BSOMetaJSParser, "topLevel", jsSrc, true);
-	  jsAst = jsAst[1][1] // access the binding, not the json object nor sequence node
-		var stAst = OMetaSupport.matchWithGrammar(JS2StConverter, "trans", jsAst, true);
-		result = view == 'javascript' ? stAst.toJavaScript() : stAst.toSmalltalk();
-	});
-	return result
+	var jsSrc = '{' + src + '}' // as literal object
+	var jsAst = OMetaSupport.matchAllWithGrammar(BSOMetaJSParser, "topLevel", jsSrc, true);
+	jsAst = jsAst[1][1] // access the binding, not the json object nor sequence node
+	var stAst = OMetaSupport.matchWithGrammar(JS2StConverter, "trans", jsAst, true);
+	return  stAst.toJavaScript();
 },
 
 
@@ -1834,8 +1827,7 @@ lively.ide.BrowserCommand.subclass('lively.ide.ViewSourceCommand', {
 	var world = WorldMorph.current();
 	var spec = [
 		{caption: 'default', value: undefined},
-		{caption: 'javascript', value: 'javascript'},
-		{caption: 'smalltalk', value: 'smalltalk'}];
+		{caption: 'javascript', value: 'javascript'}];
 	var items = spec.collect(function(ea) {
 	  return [ea.caption,function(evt) {
 				browser.viewAs = ea.value;
@@ -2413,17 +2405,6 @@ Object.subclass('lively.ide.ModuleWrapper', {
 
 	parseLkml: function(source) {
 		return ChangeSet.fromFile(this.fileName(), source);
-	},
-	
-	parseSt: function(source) {
-		if (!Global['SmalltalkParser']) return null;
-		var ast = OMetaSupport.matchAllWithGrammar(SmalltalkParser, "smalltalkClasses", source, true);
-		if (!ast) {
-		  console.warn('Couldn\'t parse ' + this.fileName());
-		  return null;
-		}
-		ast.setFileName(this.fileName());
-		return ast;
 	},
 	
 	remove: function() {
