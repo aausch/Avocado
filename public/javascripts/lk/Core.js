@@ -5414,13 +5414,6 @@ WorldMorph.addMethods({
 			["ButtonMorph", function(evt) { world.addMorph(new ScriptableButtonMorph(evt.point().extent(pt(70, 30))))}],
 			["ProgressBarMorph", function(evt) { world.addMorph(new ProgressBarMorph(evt.point().extent(pt(70, 30))))}],
 			["ScaleMorph", function(evt) { world.addMorph(new ScaleMorph(evt.point().extent(pt(70, 30))))}],
-			["FabrikClock", function(evt) {
-				require('lively.Fabrik').toRun(function() {
-					var clock = new FabrikClockWidget();
-					var morph = clock.buildView();
-					world.addMorph(morph);
-					morph.setPosition(evt.point());
-					morph.startSteppingScripts(); }); }],
 			["Text Window", function(evt) { 
 				WorldMorph.current().addTextWindow("Editable text"); }],
 			["Image Morph", function(evt) {
@@ -5504,7 +5497,6 @@ WorldMorph.addMethods({
 		var world = this.world();
 		return [
 			["TileScriptingBox", function(evt) { require('lively.TileScripting').toRun(function() {new lively.TileScripting.TileBox().openIn(world); }) }],
-			["Fabrik Component Box", function(evt) { require('lively.Fabrik').toRun(function() { Fabrik.openComponentBox(world); }) }],
 			["Webcards with name", function(evt) { require('apps.Webcards').toRun(function(){
 					var sds = new SimpleDataStore(pt(600, 300));
 					world.prompt("Name of stack:", sds.openStackWithName.bind(sds));
@@ -5787,7 +5779,6 @@ lookTouchy: function(morph) {
 	makeANullMove: function() {
 		// Process a null mouseMove event -- no change in x, y
 		// Allows simulations to respond where, eg, a morph moves under the mouse
-		// Note: Fabrik generates also Mouse events with newFakeMouseEvent; to be merged
 		var last = this.lastMouseEvent;
 		if (!last) return;
 		var nullMove = new Event(last.rawEvent);
@@ -6511,8 +6502,6 @@ WorldMorph.addMethods({
 		return this.pastePosition().subPt(topLeft);
 	},
 	
-	// similarities to Fabrik >> pasteComponentFromXMLStringIntoFabrik
-	// TODO refactor
 	pasteFromSource: function(source){
 		var copier = new ClipboardCopier();
 		var morphs = copier.loadMorphsWithWorldTrunkFromSource(source);
@@ -6772,18 +6761,6 @@ LinkMorph.subclass('ExternalLinkMorph', {
 	//text = '(' + text + ')'; // workaround for that issue
 	return eval(text);
  }
-
-// for Fabrik
-Morph.addMethods({
-    isContainedIn: function(morph) {
-        if (!this.owner)
-            return false;
-        if (this.owner === morph)
-            return true;
-        else
-            return this.owner.isContainedIn(morph)
-    },
-});
 
 // For driving a Car... 
 Morph.addMethods({

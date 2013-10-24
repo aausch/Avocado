@@ -493,7 +493,7 @@ Object.subclass('lively.TileScripting.TileMenuCreator', {
                     "innerBounds", "localBorderBounds", "worldPoint", "relativize", "relativizeRect", "localize", "localizePointFrom",
                     "transformForNewOwner", "changed", "layoutOnSubmorphLayout", "layoutChanged", "adjustForNewBounds", "position", 
                     "addSvgInspector", "addModelInspector", "connectModel", "relayToModel", "reconnectModel", "checkModel", "disconnectModel",
-                    "getModel", "getActualModel", "getModelPlug", "getModelValue", "setModelValue", "updateView", "exportLinkedFile", "isContainedIn",
+                    "getModel", "getActualModel", "getModelPlug", "getModelValue", "setModelValue", "updateView", "exportLinkedFile",
                     "leftAlignSubmorphs", "window", "layout","setBorderWidth", "getBorderWidth", "shapeRoundEdgesBy", "setStrokeOpacity", "linkToStyles",
                     "fullContainsPoint", "fullContainsWorldPoint", "removeMorph", "world", "inspect", "stopStepping", "startStepping", "addActiveScript",
                     "getStrokeOpacity", "setStrokeWidth", "getStrokeWidth", "setStroke", "getStroke", "getLineJoin", "getLineCap", "setStrokeDashArray",
