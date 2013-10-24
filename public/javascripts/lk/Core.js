@@ -5472,15 +5472,6 @@ WorldMorph.addMethods({
 		var world = this.world();
 		var toolMenuItems = [
 //			["Class Browser", function(evt) { new SimpleBrowser().openIn(world, evt.point()); }],
-			["System code browser", function(evt) { require('lively.ide').toRun(function(unused, ide) {new ide.SystemBrowser().openIn(world)})}],
-			["Local code Browser", function(evt) { require('lively.ide').toRun(function(unused, ide) {new ide.LocalCodeBrowser().openIn(world)})}],
-			["Wiki code Browser", function(evt) { require('lively.ide', 'lively.LKWiki').toRun(function(unused, ide) {
-				var cb = function(input) {
-					var repo = new URL(input);
-					new ide.WikiCodeBrowser(repo).open()
-				};
-				world.prompt('Wiki base URL?', cb, URL.source.getDirectory().toString());
-				})}],
 			["Switch System browser directory...", function(evt) { require('lively.ide').toRun(function(unused, ide) {
 				var cb = function(input) {
 					if (!input.endsWith('/')) input += '/';

@@ -395,29 +395,13 @@ lively.Helper.ToolDock.addMethods({
 	actions: function() { return [
 		{label: 'SystemBrowser', method: 'openSystemBrowser'},
 		{label: 'TextWindow', method: 'openTextWindow'},
-		{label: 'OMeta', method: 'openOMeta'},
 		{label: 'TestRunner', method: 'openTestRunner'},
 		{label: 'TextWindow', method: 'openTextWindow'}]
-	},
-
-	openSystemBrowser: function(evt) {
-		require('lively.ide').toRun(function(unused, ide) {
-			var browserMorph = new ide.SystemBrowser().openIn(this.world());
-			browserMorph.setPosition(WorldMorph.current().firstHand().getPosition())
-			this.world().firstHand().addMorphAsGrabbed(browserMorph)
-		}.bind(this))
 	},
 
 	openTextWindow: function() {
 		var morph = this.world().addTextWindow({title: 'doit!'});
 		this.world().firstHand().addMorphAsGrabbed(morph.owner);
-	},
-
-	openOMeta: function() {
-		require('lively.Ometa').toRun(function() {
-			var wrkspc = new OmetaWorkspace().openIn(this.world());
-			this.world().firstHand().addMorphAsGrabbed(wrkspc);
-		}.bind(this))
 	},
 
 	openTestRunner: function() {
