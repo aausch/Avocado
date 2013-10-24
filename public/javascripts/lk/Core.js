@@ -5414,12 +5414,6 @@ WorldMorph.addMethods({
 			["ButtonMorph", function(evt) { world.addMorph(new ScriptableButtonMorph(evt.point().extent(pt(70, 30))))}],
 			["ProgressBarMorph", function(evt) { world.addMorph(new ProgressBarMorph(evt.point().extent(pt(70, 30))))}],
 			["ScaleMorph", function(evt) { world.addMorph(new ScaleMorph(evt.point().extent(pt(70, 30))))}],
-			["Clock", function(evt) {
-				require('lively.Examples').toRun(function() {
-					var m = world.addMorph(new ClockMorph(evt.point(), 50));
-					m.startSteppingScripts();
-					ChangeSet.current().addWorldRequirement('lively.Examples')
-				})}],
 			["FabrikClock", function(evt) {
 				require('lively.Fabrik').toRun(function() {
 					var clock = new FabrikClockWidget();
@@ -5429,15 +5423,6 @@ WorldMorph.addMethods({
 					morph.startSteppingScripts(); }); }],
 			["Text Window", function(evt) { 
 				WorldMorph.current().addTextWindow("Editable text"); }],
-			["Piano Keyboard", function(evt) {
-				require('lively.Examples').toRun(function() {
-					var m = new PianoKeyboard(evt.point());
-					m.scaleBy(1.5);	 m.rotateBy(-Math.PI*2/12);
-					world.addMorph(m); }); }],
-			["Kaleidoscope", function(evt) {
-				require('lively.Examples').toRun(function() {
-					var kal = WorldMorph.current().addMorph(new SymmetryMorph(300, 7)); 
-					kal.startUp(); }) } ],
 			["Image Morph", function(evt) {
 				world.prompt('Enter image URL', function(urlString) {
 					var img = new ImageMorph(evt.point().extent(pt(100,100)), urlString);
