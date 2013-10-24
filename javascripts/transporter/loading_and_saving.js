@@ -136,6 +136,11 @@ thisModule.addSlots(avocado.transporter.repositories.httpWithWebDAV, function(ad
 
 thisModule.addSlots(avocado.transporter.repositories.github, function(add) {
 
+  add.method('urlForModuleName', function (name) {
+    name = (name.substring(name.length - 3) !== '.js') ? name + ".js" : name;
+    return this.url().substring(this.url().lastIndexOf('javascripts')) + name;
+  }, {category: ['saving to WebDAV']});
+
   add.method('fileOutModuleVersion', function (moduleVersion, codeToFileOut, successBlock, failBlock) {
     var url = this.urlForModuleName(moduleVersion.module().name());
     this.saveFile(url, codeToFileOut, successBlock, failBlock);
@@ -147,6 +152,8 @@ thisModule.addSlots(avocado.transporter.repositories.github, function(add) {
     avocado.github.currentBranch().write(url, fileContents, "Avocado saving to " + url,false);
 
   }, {category: ['saving']});
+
+
 
 });
 
