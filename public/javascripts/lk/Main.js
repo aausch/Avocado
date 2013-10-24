@@ -493,10 +493,6 @@ Object.subclass('lively.Main.ExampleLoader', {
 					widget.align(widget.bounds().bottomRight(), world.bounds().topRight().addPt(pt(-150,100)));
 					if (Config.showHilbertFun) Pen.hilbertFun(devWorld.myWorld, widget.bounds().bottomLeft().addXY(180,80));
 					devWorld.myWorld.addMorph(widget);
-					if (Config.tryFasteroids)
-					require('lively.Contributions').toRun(function() {
-						lively.Contributions.installFasteroids(world, new Rectangle(150, 100, 600, 400));
-					});
 				}
 				parser.parse();
 			});
