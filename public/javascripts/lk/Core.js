@@ -5415,11 +5415,6 @@ WorldMorph.addMethods({
 				require('lively.GridLayout').toRun(function() {
 					GridLayoutMorph.demo(evt.hand.world(), evt.point()); }); }],
 			["Effects demo (FF only)", function(evt) { require('lively.demofx').toRun(Functions.Empty); }],
-			["PresentationPage", function(evt) { 
-				require('lively.Presentation').toRun(function(){
-					world.addMorph(new lively.Presentation.PageMorph(new Rectangle(0,0,800,600)))
-				}); 
-			}],
 		];
 	},
 	

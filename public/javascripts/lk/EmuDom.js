@@ -1234,7 +1234,6 @@ var SVGStylable = function() {};
 Element.defineAttributes(SVGStylable,
   {name:'className', type:SVGAnimatedString,   readonly:true, xmlName:'class'},
   {name:'style',     type:CSSStyleDeclaration, readonly:true});
-SVGStylable.prototype.getPresentationAttribute = function(name) { TODO(); };
 
 // SVGAnimatedPoints
 
