@@ -5453,13 +5453,6 @@ WorldMorph.addMethods({
 					world.addMorph(new lively.Presentation.PageMorph(new Rectangle(0,0,800,600)))
 				}); 
 			}],
-			["FileUpload Morph", function(evt) { 
-				require('lively.FileUploadWidget').toRun(function(){
-					var morph = new FileUploadMorph();
-					world.addMorph(morph)
-					morph.setPosition(evt.point());
-				}); 
-			}],
 		];
 	},
 	
