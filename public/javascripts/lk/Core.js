@@ -3338,10 +3338,6 @@ addAllHandles: function(evt) {
 				if (this.hasHandles()) this.removeAllHandlesExcept(null);
 					else this.addAllHandles(evt) }.bind(this) ],		
 			["inspect", function(evt) { new SimpleInspector(this).openIn(this.world())}],
-			["show class in browser", function(evt) { var browser = new SimpleBrowser(this);
-				browser.openIn(this.world(), evt.point());
-				browser.getModel().setClassName(this.getType());}]
-			];
 		if (this.okToDuplicate())
 			items.unshift(["duplicate", this.copyToHand.curry(evt.hand)]);
 
@@ -5398,7 +5394,6 @@ WorldMorph.addMethods({
 	toolSubMenuItems: function(evt) {
 		var world = this.world();
 		var toolMenuItems = [
-//			["Class Browser", function(evt) { new SimpleBrowser().openIn(world, evt.point()); }],
 			["Switch System browser directory...", function(evt) { require('lively.ide').toRun(function(unused, ide) {
 				var cb = function(input) {
 					if (!input.endsWith('/')) input += '/';
