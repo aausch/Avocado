@@ -3338,6 +3338,7 @@ addAllHandles: function(evt) {
 				if (this.hasHandles()) this.removeAllHandlesExcept(null);
 					else this.addAllHandles(evt) }.bind(this) ],		
 			["inspect", function(evt) { new SimpleInspector(this).openIn(this.world())}],
+		];
 		if (this.okToDuplicate())
 			items.unshift(["duplicate", this.copyToHand.curry(evt.hand)]);
 
