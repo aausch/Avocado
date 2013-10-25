@@ -394,8 +394,6 @@ lively.Helper.ToolDock.addMethods({
 	// define actions
 	actions: function() { return [
 		{label: 'SystemBrowser', method: 'openSystemBrowser'},
-		{label: 'TextWindow', method: 'openTextWindow'},
-		{label: 'TestRunner', method: 'openTestRunner'},
 		{label: 'TextWindow', method: 'openTextWindow'}]
 	},
 
@@ -404,22 +402,6 @@ lively.Helper.ToolDock.addMethods({
 		this.world().firstHand().addMorphAsGrabbed(morph.owner);
 	},
 
-	openTestRunner: function() {
-		var openTestRunner = function(optModule) {
-			var morph = new TestRunner(optModule).openIn(this.world());
-			this.world().firstHand().addMorphAsGrabbed(morph);
-		}.bind(this)
-		var cb = function(input) {
-			if (!input) { openTestRunner(); return };
-			var m = module(input);
-			var url = new URL(m.uri());
-			if (new FileDirectory(url.getDirectory()).fileOrDirectoryExists(url.filename()))
-				require(input).toRun(function(u, m) { openTestRunner(m) });
-			else
-				this.world().prompt('Module ' + input + ' does not exist', cb, input);
-		}.bind(this)
-		this.world().prompt('For which module? None for all', cb);
-	},
 
 
 });

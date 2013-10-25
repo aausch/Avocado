@@ -5434,7 +5434,6 @@ WorldMorph.addMethods({
 					Config.debugExtras = true;
 					lively.lang.Execution.installStackTracers(); }],
 			["Console", function(evt) {world.addFramedMorph(new ConsoleWidget(50).buildView(pt(800, 100)), "Console"); }],
-			["TestRunner", function(evt) { require('lively.TestFramework').toRun(function() { new TestRunner().openIn(world) }) }],
 			["OMetaWorkspace", function(evt) { require('lively.Ometa').toRun(function() { new OmetaWorkspace().openIn(world); }) }],
 			["Call Stack Viewer", function(evt) { 
 			if (Config.debugExtras) lively.lang.Execution.showStack("use viewer");
