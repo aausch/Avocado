@@ -225,24 +225,6 @@ Object.extend(Global, {
 		}
 	}
 	
-	// WebCards
-	// if(UserAgent.isChrome){//Google Chrome dose not support multiple Params for logging
-	// 	var orignalWarn = platformConsole.warn;
-	// 	platformConsole.warn = function(){
-	// 		orignalWarn.apply(platformConsole,[Strings.formatFromArray($A(arguments))]);
-	// 	};
-	// 	
-	// 	var orignalInfo = platformConsole.info;
-	// 	platformConsole.info = function(){
-	// 		orignalInfo.apply(platformConsole,[Strings.formatFromArray($A(arguments))]);
-	// 	};
-	// 	
-	// 	var orignalLog = platformConsole.log;
-	// 	platformConsole.log = function(){
-	// 		orignalLog.apply(platformConsole,[Strings.formatFromArray($A(arguments))]);
-	// 	};
-	// }
-	
     
 })(); 
 
@@ -1743,10 +1725,6 @@ lively.data.Wrapper.subclass('Morph', {
                 continue; // ignore whitespace and maybe other things
             }
             var type = lively.data.Wrapper.getEncodedType(desc);
-            // depth first traversal
-
-			// WebCards...
-		 	// if (type && !type.startsWith("anonymous_")) { //I have no idea what that mean
 
             if (type) {
                 var wrapper = importer.importWrapperFromNode(desc);
@@ -5466,20 +5444,6 @@ WorldMorph.addMethods({
 		return toolMenuItems
 	},
 
-	scriptingSubMenuItems: function(evt) {
-		var world = this.world();
-		return [
-			["TileScriptingBox", function(evt) { require('lively.TileScripting').toRun(function() {new lively.TileScripting.TileBox().openIn(world); }) }],
-			["Webcards with name", function(evt) { require('apps.Webcards').toRun(function(){
-					var sds = new SimpleDataStore(pt(600, 300));
-					world.prompt("Name of stack:", sds.openStackWithName.bind(sds));
-					world.addFramedMorph(sds, 'WebCards', pt(333, 222));
-				}); 
-			}],
-         
-		];
-	},
-
 	preferencesSubMenuItems: function(evt) {
 		var world = this.world();
 		return [
@@ -5518,7 +5482,6 @@ WorldMorph.addMethods({
 			['Simple morphs', this.simpleMorphsSubMenuItems(evt)],
 			['Complex morphs', this.complexMorphsSubMenuItems(evt)],
 			['Tools', this.toolSubMenuItems(evt)],
-			['Scripting', this.scriptingSubMenuItems(evt)],
 			['Preferences', this.preferencesSubMenuItems(evt)],
 			['Help', this.helpSubMenuItems(evt)]];
 	},
