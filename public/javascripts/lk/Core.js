@@ -5386,9 +5386,6 @@ WorldMorph.addMethods({
 					img.openInWorld() }) }],
 			["Video Morph", function(evt) {
 				VideoMorph.openAndInteractivelyEmbed(evt.point()) }],
-			["Layout Demo", function(evt) {
-				require('lively.GridLayout').toRun(function() {
-					GridLayoutMorph.demo(evt.hand.world(), evt.point()); }); }],
 		];
 	},
 	

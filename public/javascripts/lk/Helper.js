@@ -23,8 +23,6 @@
 
 module('lively.Helper').requires().toRun(function() {
 
-// this.getRichText().asMorph().openInWorld()
-
 /*
  * Stack Viewer when Dans StackTracer is not available
  */

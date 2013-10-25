@@ -155,34 +155,6 @@ BoxMorph.subclass('ButtonMorph', {
   	initColor: function() {
     	var gfx = lively.paint;
     	
-    	/* This code confuses me. -- Adam
-        if (this.baseFill instanceof gfx.LinearGradient) {
-            var base = this.baseFill.stops[0].color().lighter(0);
-	    	this.normalFill =
-				new gfx.LinearGradient([new gfx.Stop(0, base), new gfx.Stop(1, base.lighter())],
-				gfx.LinearGradient.SouthNorth);       
-
-            var base = this.baseFill.stops[0].color().lighter(1);
-	    	this.lighterFill = 
-				new gfx.LinearGradient([new gfx.Stop(0, base), new gfx.Stop(1, base.lighter())],
-				gfx.LinearGradient.SouthNorth);
-
-        } else if (this.baseFill instanceof gfx.RadialGradient) {
-            var base = this.baseFill.stops[0].color().lighter(0);
-            this.normalFill= new gfx.RadialGradient([new gfx.Stop(0, base.lighter()), new gfx.Stop(1, base)]);
-
-             var base = this.baseFill.stops[0].color().lighter(1);
-             this.lighterFill= new gfx.RadialGradient([new gfx.Stop(0, base.lighter()), new gfx.Stop(1, base)]);
-        } else if (this.baseFill instanceof Color) {
-        	this.normalFill = this.baseFill.lighter(0);
-            this.lighterFill = this.baseFill.lighter(1);
-        } else if (this.baseFill == null || this.baseFill == undefined) {
-			this.lighterFill = null;
-			this.normalFill = null;
-		} else {
-			throw new Error('unsupported fill type ' + this.baseFill);
-		}
-		*/
 
         if (this.baseFill) {
             this.normalFill  = this.baseFill;
@@ -276,40 +248,6 @@ BoxMorph.subclass('ButtonMorph', {
 	}
 });
 
-Morph.subclass('ButtonBehaviorMorph', {
-    
-    documentation: "***under construction***",
-    focusHaloBorderWidth: 3, // override the default
-    normalBorderFill: null,
-    mouseOverFill: Color.blue,
-    mousePressedFill: Color.orange,
-    mouseDownAction: function (evt) {},
-    mouseUpAction: function (evt) {}, 
-
-	initialize: function($super, targetMorph) {
-		// A ButtonBehaviorMorph can be put over any morph or part of a morph
-		// It can show a halo on rollover, and can act on mouseDown and mouseUp
-		// At some point we'll unify this with ButtonMorph as a simplification
-		// It should be possible to say
-		//	<anyMorph>.addButtonBehavior({onMouseDown: function...})
-		//	<anyMorph>.addButtonBehavior({onMouseUp: function...})
-		// And it should be possible to say to either the morph or its behaviorMorph
-		//	<eitherOne>.disableButtonBehavior()
-		//	<eitherOne>.ebableButtonBehavior()
-
-		console.log("new ButtonBehaviorMorph 1 " + Object.inspect(this.shape));
-		$super(targetMorph.shape.copy());
-		console.log("new ButtonBehaviorMorph 2 " + Object.inspect(this.shape));
-		//this.setBounds(targetMorph.innerBounds());
-		console.log("new ButtonBehaviorMorph 3 " + Object.inspect(this.shape));
-
-		// Styling
-		// this.linkToStyles(['buttonBehavior']);
-		return this;
-	},
-
-    last: function () {}
-});
 
 ButtonMorph.subclass('ScriptableButtonMorph', {
 	
@@ -345,8 +283,6 @@ ButtonMorph.subclass('ScriptableButtonMorph', {
 					
 					}
 			)
-			
-			//throw e;
 		}
 	},
 
@@ -359,12 +295,6 @@ ButtonMorph.subclass('ScriptableButtonMorph', {
 	},
 
 	editScript: function() {
-		// var dialog = new PromptDialogMorph();
-		// dialog.title = 'Edit script';
-		// dialog.setText(this.scriptSource);
-		// dialog.callback = function(input) { this.scriptSource = input }.bind(this);
-		// dialog.openIn(this, WorldMorph.current().positionForNewMorph(dialog));
-		// return dialog;
 		this.world().editPrompt(
 			'Edit script',
 			function(input) { this.scriptSource = input }.bind(this),
@@ -651,7 +581,7 @@ Morph.subclass('HandleMorph', {
 	okToDuplicate: Functions.False,
 
 	handlesMouseDown: function(evt) { return true },
-onMouseDown: function(evt) {
+        onMouseDown: function(evt) {
 		//console.log("handle down");
 		evt.hand.setMouseFocus(this);
 		this.hideHelp();
@@ -1127,11 +1057,6 @@ TextMorph.subclass("CheapListMorph", {
         return list && list.invoke('replace', /\n/g, " ");
     },
 
-//    setExtent: function(ignored) {
-        // Defeat recomposition when reframing windows
-        // May have deleterious side-effects
-//    },
-
     onDeserialize: function() {
         this.layoutChanged();
     },
@@ -1533,14 +1458,10 @@ BoxMorph.subclass("TextListMorph", {
     	var last = this.submorphs.last();
     	last.remove();
     	this.insertMorph(last,false);
-    	/*this.rawNode.insertBefore(last.rawNode, this.submorphs.last().rawNode.nextSibling);
-
-    	this.submorphs.unshift(last);*/
     	last.setPosition(oldPosition);
 
     	this.setSelectionToMatch(priorItem);
     	this.resetScrollPane();
-    	//this.enclosingScrollPane();
     },
 
     
